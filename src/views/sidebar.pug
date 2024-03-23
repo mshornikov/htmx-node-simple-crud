@@ -9,4 +9,9 @@ ul.contact-list
       )= contact.name
 
 div.actions
-  a(href='/contacts/new') New Contact
+  a(
+    href='/contacts/new',
+    hx-get='/contacts/new',
+    hx-target='#content',
+    hx-push-url='true'
+  ) New Contact

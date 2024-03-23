@@ -20,8 +20,17 @@ router.get('/contacts', async (req, res) => {
   res.render('index', { contacts });
 });
 
+// GET /contacts/new
+router.get('/contacts/new', (req, res) => {
+  if (req.headers['hx-request']) {
+    res.render('form');
+  } else {
+    res.render('index', { action: 'new', contacts, contact: {} });
+  }
+});
+
 // GET /contacts/1
-router.get('/contacts/:id', (req, res) => {
+	router.get('/contacts/:id', (req, res) => {
   const { id } = req.params;
   const contact = contacts.find((c) => c.id === Number(id));
 
