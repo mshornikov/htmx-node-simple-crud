@@ -15,13 +15,17 @@ html
         h1 Contact Manager
 
     section#sidebar
-      ul.contact-list
-        each contact in contacts
-          li #{contact.name}
-      div.actions
-        a(href='/contacts/new') New Contact
+      include sidebar.pug
 
     main#content
-      p Select a contact
+      case action
+        when 'show'
+          include contact.pug
+        when 'new'
+          // Coming soon
+        when 'edit'
+          // Coming soon
+        default
+          p Select a contact
 
     script(src='https://unpkg.com/htmx.org@1.9.10')

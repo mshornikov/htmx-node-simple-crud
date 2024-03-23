@@ -1,0 +1,12 @@
+ul.contact-list
+  each contact in contacts
+    li
+      a(
+        href=`/contacts/${contact.id}`,
+        hx-get=`/contacts/${contact.id}`,
+        hx-target='#content',
+        hx-push-url='true'
+      )= contact.name
+
+div.actions
+  a(href='/contacts/new') New Contact

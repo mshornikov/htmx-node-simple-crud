@@ -20,4 +20,16 @@ router.get('/contacts', async (req, res) => {
   res.render('index', { contacts });
 });
 
+// GET /contacts/1
+router.get('/contacts/:id', (req, res) => {
+  const { id } = req.params;
+  const contact = contacts.find((c) => c.id === Number(id));
+
+  if (req.headers['hx-request']) {
+    res.render('contact', { contact });
+  } else {
+    res.render('index', { action: 'show', contacts, contact });
+  }
+});
+
 module.exports = router;
