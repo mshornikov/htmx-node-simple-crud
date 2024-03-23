@@ -22,10 +22,12 @@ router.get('/contacts', async (req, res) => {
 
 // GET /contacts/new
 router.get('/contacts/new', (req, res) => {
+  const isEditing = false;
+
   if (req.headers['hx-request']) {
-    res.render('form', { contact: {} });
+    res.render('form', { contact: {}, isEditing });
   } else {
-    res.render('index', { action: 'new', contacts, contact: {} });
+    res.render('index', { action: 'new', contacts, contact: {}, isEditing });
   }
 });
 
@@ -70,11 +72,12 @@ router.post('/contacts', (req, res) => {
 router.get('/contacts/:id/edit', (req, res) => {
   const { id } = req.params;
   const contact = contacts.find((c) => c.id === Number(id));
+  const isEditing = true;
 
   if (req.headers['hx-request']) {
-    res.render('form', { contact });
+    res.render('form.njk', { contact, isEditing });
   } else {
-    res.render('index', { action: 'edit', contacts, contact });
+    res.render('index', { action: 'edit', contacts, contact, isEditing });
   }
 });
 

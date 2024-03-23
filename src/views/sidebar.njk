@@ -1,0 +1,15 @@
+<ul class="contact-list">
+    {% for contact in contacts %}
+      <li>
+	  <a href="/contacts/{{contact.id}}" hx-get="/contacts/{{contact.id}}" hx-target="#content" hx-push-url="true">
+     	      {{ contact.name }}	
+	  </a>
+      </li>
+    {% endfor %}
+</ul>
+
+<div class="actions">
+    <a href="/contacts/new" hx-get="/contacts/new" hx-target="#content" hx-push-url="true">
+        New Contact 
+    </a>
+</div>

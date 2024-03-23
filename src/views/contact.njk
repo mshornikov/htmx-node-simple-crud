@@ -1,0 +1,23 @@
+<h2> {{ contact.name }} </h2>
+
+<p>
+    <strong>Name:</strong>
+    {{ contact.name }}
+</p>
+
+<p>
+    <strong>Email:</strong>
+    {{ contact.email }}
+</p>
+
+<div class="actions">
+    <form method="POST" action="/delete/{{contact.id}}?_method=DELETE">
+        <button type="submit" hx-delete="/delete/{{contact.id}}" hx-target="#sidebar" hx-push-url="/contacts" class="link">
+            Delete Contact 
+        </button>
+    </form>
+
+    <a href="/contact/{{contact.id}}/edit" hx-get="/contacts/{{contact.id}}/edit" hx-target="#content" hx-push-url="true">
+        Edit Contact    
+    </a>
+</div>

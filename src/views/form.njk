@@ -1,0 +1,28 @@
+<h2>
+   {% if isEditing %}
+	Edit Contact
+   {% else %}
+        New Contact
+   {% endif %}
+</h2>
+
+<form action="{% if isEditing %}/update/{{contact.id}}?_method=PUT{% else %}/contacts{% endif %}"
+      method="POST"
+      {% if not isEditing %}hx-post="/contacts"{% endif %}
+      {% if isEditing %}hx-put="/update/{{contact.id}}"{% endif %}
+      hx-target="#sidebar"
+      {% if isEditing %}hx-push-url="/contacts/{{contact.id}}"{% endif %}
+      hx-on::after-request="if(event.detail.successful) this.reset()">
+
+    <label for="name">Name:</label>
+    <input id="name" type="text" name="name" required value="{{contact.name}}">
+    <label for="email">Email:</label>
+    <input id="email" type="email" name="email" required value="{{contact.email}}">
+
+
+<div class="actions">
+    <button type="submit">Submit</button>
+</div>
+
+</form>
+
