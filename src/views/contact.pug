@@ -2,3 +2,11 @@ h2 #{contact.name}
 
 p #[strong Name:] #{contact.name}
 p #[strong Email:] #{contact.email}
+
+div.actions
+  a(
+    href=`/contacts/${contact.id}/edit`,
+    hx-get=`/contacts/${contact.id}/edit`,
+    hx-target='#content',
+    hx-push-url='true'
+  ) Edit Contact
