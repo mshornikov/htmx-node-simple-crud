@@ -1,16 +1,16 @@
-const express = require('express');
-const path = require('path');
-const methodOverride = require('method-override');
-const routes = require('./routes/index');
+import express from 'express';
+import methodOverride from 'method-override';
+
+import routes from './routes/index.js';
 
 const app = express();
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', 'views');
 app.set('view engine', 'pug');
 
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 app.use('/', routes);
 
 const server = app.listen(3000, () => {
