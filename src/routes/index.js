@@ -30,7 +30,7 @@ router.get('/contacts/new', (req, res) => {
 });
 
 // GET /contacts/1
-	router.get('/contacts/:id', (req, res) => {
+router.get('/contacts/:id', (req, res) => {
   const { id } = req.params;
   const contact = contacts.find((c) => c.id === Number(id));
 
@@ -38,6 +38,23 @@ router.get('/contacts/new', (req, res) => {
     res.render('contact', { contact });
   } else {
     res.render('index', { action: 'show', contacts, contact });
+  }
+});
+
+// POST /contacts
+router.post('/contacts', (req, res) => {
+  const newContact = {
+    id: contacts.length + 1,
+    name: req.body.name,
+    email: req.body.email,
+  };
+
+  contacts.push(newContact);
+
+  if (req.headers['hx-request']) {
+    res.render('sidebar', { contacts });
+  } else {
+    res.render('index', { action: 'new', contacts, contact: {} });
   }
 });
 
