@@ -110,4 +110,25 @@ router.put('/update/:id', (req, res) => {
   }
 });
 
+// DELETE /contacts/1
+router.delete('/delete/:id', (req, res) => {
+  const { id } = req.params;
+  const index = contacts.findIndex((c) => c.id === Number(id));
+
+  if (index !== -1) contacts.splice(index, 1);
+  if (req.headers['hx-request']) {
+    res.render('sidebar', { contacts }, (err, sidebarHtml) => {
+      const html = `
+        <main id="content" hx-swap-oob="true">
+          <p class="flash">Contact was successfully deleted!</p>
+        </main>
+        ${sidebarHtml}
+      `;
+      res.send(html);
+    });
+  } else {
+    res.redirect('/contacts');
+  }
+});
+
 module.exports = router;
