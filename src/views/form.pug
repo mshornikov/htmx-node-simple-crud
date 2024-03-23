@@ -1,8 +1,6 @@
 h2 New Contact
 
 form(
-  action='/contacts',
-  method='POST',
   hx-post='/contacts',
   hx-target='#sidebar',
   hx-on::after-request='if(event.detail.successful) this.reset()'

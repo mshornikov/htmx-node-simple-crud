@@ -52,7 +52,15 @@ router.post('/contacts', (req, res) => {
   contacts.push(newContact);
 
   if (req.headers['hx-request']) {
-    res.render('sidebar', { contacts });
+    res.render('sidebar', { contacts }, (err, sidebarHtml) => {
+    const html = `
+      <main id="content" hx-swap-oob="afterbegin">
+        <p class="flash">Contact was successfully added!</p>
+      </main>
+      ${sidebarHtml}
+    `;
+    res.send(html);
+  });
   } else {
     res.render('index', { action: 'new', contacts, contact: {} });
   }
